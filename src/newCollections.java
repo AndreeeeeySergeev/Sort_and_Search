@@ -2,58 +2,42 @@ import java.util.Comparator;
 import java.util.List;
 
 public class newCollections {
-    /**
-     * Выполняет бинарный поиск в отсортированном списке элементов, реализующих интерфейс Comparable.
-     *
-     * @param list Список элементов для поиска, должен быть отсортирован.
-     * @param key  Элемент, который необходимо найти.
-     * @param <T>  Тип элемента, который должен быть совместим с элементами списка.
-     * @return Индекс найденного элемента или отрицательное значение, представляющее точку вставки.
-     */
+
     public static <T> int binarySearch(List<? extends Comparable<? super T>> list, T key) {
         int low = 0;
         int high = list.size() - 1;
 
         while (low <= high) {
-            int mid = (low + high) >>> 1; // Находим середину текущего диапазона
-            Comparable<? super T> midVal = list.get(mid); // Получаем элемент в середине списка
-            int cmp = midVal.compareTo(key); // Сравниваем середину с ключом
+            int mid = (low + high) >>> 1;
+            Comparable<? super T> midVal = list.get(mid);
+            int cmp = midVal.compareTo(key);
 
             if (cmp < 0)
-                low = mid + 1; // Искомое значение больше середины, смещаем нижнюю границу
+                low = mid + 1;
             else if (cmp > 0)
-                high = mid - 1; // Искомое значение меньше середины, смещаем верхнюю границу
+                high = mid - 1;
             else
-                return mid; // Элемент найден, возвращаем его индекс
+                return mid;
         }
-        return -(low + 1);  // Элемент не найден, возвращаем отрицательную точку вставки
+        return -(low + 1);
     }
 
-    /**
-     * Выполняет бинарный поиск в отсортированном списке элементов с использованием компаратора.
-     *
-     * @param list Список элементов для поиска, должен быть отсортирован.
-     * @param key  Элемент, который необходимо найти.
-     * @param c    Компаратор для определения порядка элементов.
-     * @param <T>  Тип элементов списка.
-     * @return Индекс найденного элемента или отрицательное значение, представляющее точку вставки.
-     */
     public static <T> int binarySearch(List<? extends T> list, T key, Comparator<? super T> c) {
         int low = 0;
         int high = list.size() - 1;
 
         while (low <= high) {
-            int mid = (low + high) >>> 1; // Находим середину текущего диапазона
-            T midVal = list.get(mid); // Получаем элемент в середине списка
-            int cmp = c.compare(midVal, key); // Сравниваем середину с ключом, используя компаратор
+            int mid = (low + high) >>> 1;
+            T midVal = list.get(mid);
+            int cmp = c.compare(midVal, key);
 
             if (cmp < 0)
-                low = mid + 1; // Искомое значение больше середины, смещаем нижнюю границу
+                low = mid + 1;
             else if (cmp > 0)
-                high = mid - 1; // Искомое значение меньше середины, смещаем верхнюю границу
+                high = mid - 1;
             else
-                return mid; // Элемент найден, возвращаем его индекс
+                return mid;
         }
-        return -(low + 1);  // Элемент не найден, возвращаем отрицательную точку вставки
+        return -(low + 1);
     }
 }
